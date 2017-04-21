@@ -16,9 +16,8 @@ def index(request):
     result = []
     if spotsHash:
         # Display spots in sorted order by distance to user location
-        arr = sorted(spotsHash.iteritems(), key = lambda x:x[1])
-        for x in arr:
-            spot = Spot.objects.get(id=x[0])
+        for spot_id, dist in sorted(spotsHash.iteritems(), key = lambda x:x[1]):
+            spot = Spot.objects.get(id=spot_id)
             spotObj = {'id': spot.id,
                        'lat': spot.latitude,
                        'long': spot.longitude,
