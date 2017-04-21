@@ -1,0 +1,143 @@
+Application can be run as:
+python manage.py runserver
+
+Backend is sqlite3. 
+10 parking spots objects have been prepopulated using geolocations from downtown SF. 
+
+
+1) Get available spots  API
+   parking/spots?lat=<lat>&long=<long>&radius=<radius>
+   paramters: lat , long, radius in miles
+
+   Available Parking spots in that radius will be displayed in sorted order from user location
+
+2) Reserve a spot API
+
+   parking/reserve?parking_spot=<spot_id>&time_range<time>
+
+   parameters:  spot id of spot, time_range: time in minutes  
+
+   Return: response of spot reserved
+
+Example:
+   http://127.0.0.1:8000/parking/spots?lat=37.785878&long=-122.396863&radius=1
+[
+    {
+        "lat": 37.785878, 
+        "id": 1, 
+        "long": -122.396863
+    }, 
+    {
+        "lat": 37.785538, 
+        "id": 8, 
+        "long": -122.397174
+    }, 
+    {
+        "lat": 37.786421, 
+        "id": 2, 
+        "long": -122.397421
+    }, 
+    {
+        "lat": 37.785224, 
+        "id": 9, 
+        "long": -122.397528
+    }, 
+    {
+        "lat": 37.786718, 
+        "id": 3, 
+        "long": -122.397797
+    }, 
+    {
+        "lat": 37.787159, 
+        "id": 4, 
+        "long": -122.398387
+    }, 
+    {
+        "lat": 37.786811, 
+        "id": 5, 
+        "long": -122.398784
+    }, 
+    {
+        "lat": 37.784639, 
+        "id": 10, 
+        "long": -122.398526
+    }, 
+    {
+        "lat": 37.787311, 
+        "id": 6, 
+        "long": -122.399363
+    }, 
+    {
+        "lat": 37.787743, 
+        "id": 7, 
+        "long": -122.39976
+    }
+]
+
+
+
+  http://127.0.0.1:8000/parking/reserve/?parking_spot=1&time_range=30
+
+  {
+    "lat": 37.785878, 
+    "reservedTime": "30.0 mins", 
+    "id": 1, 
+    "long": -122.396863, 
+    "startTime": "00:48"
+}
+
+
+ http://127.0.0.1:8000/parking/spots?lat=37.785878&long=-122.396863&radius=1
+  (After reserving spot 1,  it wont be displayed in available spots)
+
+[
+    {
+        "lat": 37.785538, 
+        "id": 8, 
+        "long": -122.397174
+    }, 
+    {
+        "lat": 37.786421, 
+        "id": 2, 
+        "long": -122.397421
+    }, 
+    {
+        "lat": 37.785224, 
+        "id": 9, 
+        "long": -122.397528
+    }, 
+    {
+        "lat": 37.786718, 
+        "id": 3, 
+        "long": -122.397797
+    }, 
+    {
+        "lat": 37.787159, 
+        "id": 4, 
+        "long": -122.398387
+    }, 
+    {
+        "lat": 37.786811, 
+        "id": 5, 
+        "long": -122.398784
+    }, 
+    {
+        "lat": 37.784639, 
+        "id": 10, 
+        "long": -122.398526
+    }, 
+    {
+        "lat": 37.787311, 
+        "id": 6, 
+        "long": -122.399363
+    }, 
+    {
+        "lat": 37.787743, 
+        "id": 7, 
+        "long": -122.39976
+    }
+]
+
+
+
+   
