@@ -14,7 +14,7 @@ def index(request):
     checkReservationsComplete()
     spotsHash = getAvailableSpots(req_lat, req_long, req_radius)
     result = []
-    if spotsHash != {}:
+    if spotsHash:
         # Display spots in sorted order by distance to user location
         arr = sorted(spotsHash.iteritems(), key = lambda x:x[1])
         for x in arr:
