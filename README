@@ -9,16 +9,18 @@ Backend is sqlite3.
    parking/spots?lat=<lat>&long=<long>&radius=<radius>
    paramters: lat , long, radius in miles
 
-   Available Parking spots in that radius will be displayed in sorted order from user location
-
+   Available Parking spots in that radius will be displayed in sorted order from user location.
+   (Spots that were reserved and are past their allocated time will be made available).
+ 
 2) Reserve a spot API
 
    parking/reserve?parking_spot=<spot_id>&time_range<time>
 
    parameters:  spot id of spot, time_range: time in minutes  
 
-   Return: response of spot reserved
+   Return: response of spot reserved or notification if its no longer available
 
+  
 Example:
    http://127.0.0.1:8000/parking/spots?lat=37.785878&long=-122.396863&radius=1
 [
